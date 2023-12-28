@@ -18,7 +18,9 @@ defmodule KVServer do
 
   defp loop_acceptor(socket) do
     {:ok, client} = :gen_tcp.accept(socket)
-    serve(client)
+    # Allows to serve multiple client connections
+    {:ok, pid} = Task.Supervisor.start_child(KVServer.TaskSupervisor, fn -> serve(client) end)
+    :gen_tcp.controlling_process(client, pid)
     loop_acceptor(socket)
   end
 
