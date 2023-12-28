@@ -1,4 +1,3 @@
-# KvUmbrella
+# KVStore
 
 **TODO: Add description**
-
