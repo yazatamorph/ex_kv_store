@@ -9,9 +9,10 @@ defmodule KVServer.Command do
     end
   end
 
-  # def run(command) do
-  #   {:ok, "OK\r\n"}
-  # end
+  @doc """
+  Runs the given command.
+  """
+  def run(command)
 
   def run({:create, bucket}) do
     case KV.Router.route(bucket, KV.Registry, :create, [KV.Registry, bucket]) do
